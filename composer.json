@@ -1,0 +1,19 @@
+{
+    "name": "stpn/logger",
+    "description": "logger",
+    "authors": [
+        {
+            "name": "stepanshulpin",
+            "email": "steve13.12@yandex.ru"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+		"psr/log": "1.0.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Logger\\": "./src"
+		}
+	}
+}
