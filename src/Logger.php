@@ -1,13 +1,32 @@
 <?php
 namespace Logger;
 
+use Iterator;
 use Psr\Log\LoggerInterface;
 use Psr\Log\AbstractLogger;
 
 class Logger extends AbstractLogger implements LoggerInterface
 {
-    public function log($level, $message, array $context = [])
+    public $routes;
+
+	public function __construct(Iterator $routes)
 	{
-		//тут мы будем логировать
+		$this->routes = $routes;
+	}
+
+	public function log($level, $message, array $context = [])
+	{
+		foreach ($this->routes as $route)
+		{
+			if (!$route instanceof Route)
+			{
+				continue;
+			}
+			if (!$route->isEnable)
+			{
+				continue;
+			}
+			$route->log($level, $message, $context);
+		}
 	}
 }
